@@ -1,18 +1,19 @@
 import { GameEngine } from "../../common/game-engine.ts";
 import {
     Message,
-    SndMessage,
+    SendMessage,
     GameInterruptedMessage,
     GameFinishedMessage,
 } from "../../common/message/messages.ts";
 import { SocketManager } from "./socket-manager.ts";
 import { ClientManager } from "./client-manager.ts";
-import { ClintType } from "../../common/client-types.ts"
+import { ClientType } from "../../common/client-types.ts"
+import { GameStartedMessage, PlacementMessage } from "../../common/message/messages.ts";
 import {
     GameEndReason,
     GameEndReason as GameInterruptedReason,
 } from "../../common/game-end-reasons.ts"
-import { PieceType } from "../../common/game-types.ts";
+import { PieceType, Placement } from "../../common/game-types.ts";
 
 export class GameManager {
     protected gameInterruptedReason: GameInterruptedReason | undefined =
@@ -83,8 +84,8 @@ export class GameManager {
 
         if (message instanceof PlacementMessage) {
             if (this.game.getGameFinishedReason()) {
-              console.log("Not sending placement message because game is finished.", message.toJson())
-              return;
+                console.log("Not sending placement message because game is finished.", message.toJson())
+                return;
             }
             if (this.game.place(message.placement)) {
                 sendToOpponent(message);

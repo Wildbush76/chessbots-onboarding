@@ -4,12 +4,12 @@
 export enum PieceType {
     X = "x",
     O = "o",
-    BLANK = "blank"
+    BLANK = ""
 }
 
 export class Placement {
     constructor(
         public readonly pieceType: PieceType,
         public square: number
-    ) {}
+    ) { }
 }

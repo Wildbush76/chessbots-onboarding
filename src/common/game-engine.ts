@@ -1,5 +1,5 @@
 import { GameFinishedReason } from "./game-end-reasons.ts";
-import { Placementos } from "./game-types.ts";
+import { Placement, PieceType } from "./game-types.ts";
 
 export class GameEngine {
     private board: PieceType[];
@@ -44,9 +44,9 @@ export class GameEngine {
      * @returns true if the rows has a win
      */
     isRowWin(pieceType: PieceType, offset: number): boolean {
-        const first = this.board[offset*3] == pieceType;
-        const second= this.board[1+(offset*3)] == pieceType;
-        const third = this.board[2+(offset*3)] == pieceType;
+        const first = this.board[offset * 3] == pieceType;
+        const second = this.board[1 + (offset * 3)] == pieceType;
+        const third = this.board[2 + (offset * 3)] == pieceType;
         return first && second && third;
     }
 
@@ -62,14 +62,14 @@ export class GameEngine {
 
     isDiagonalWin(pieceType: PieceType): boolean {
         const first = this.board[0] == pieceType;
-        const second= this.board[4] == pieceType;
+        const second = this.board[4] == pieceType;
         const third = this.board[8] == pieceType;
         return first && second && third;
     }
 
     isAntiDiagonalWin(pieceType: PieceType): boolean {
         const first = this.board[2] == pieceType;
-        const second= this.board[4] == pieceType;
+        const second = this.board[4] == pieceType;
         const third = this.board[6] == pieceType;
         return first && second && third;
     }
